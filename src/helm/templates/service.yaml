@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "encryption-services.name" . }}
+  labels:
+    app: {{ include "encryption-services.name" . }}
+    chart: {{ include "encryption-services.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  annotations:
+    getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v1
+      kind: Mapping
+      name: encryptionservice-mapping-{{ .Release.Namespace }}
+      ambassador_id: ambassador-int
+      host: {{ .Values.host_name }}
+      prefix: /encryptionservice/
+      rewrite: /encryptionservice/
+      service: {{ include "encryption-services.name" . }}.{{ .Release.Namespace }}:{{ .Values.service.port }}
+      timeout_ms: 40000
+      add_response_headers:
+        Strict-Transport-Security: "max-age=31536000; includeSubDomains"
+        X-Content-Type-Options: "nosniff"
+        X-Frame-Options: "DENY"
+        X-XSS-Protection: "1; mode=block"
+
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - name: http
+      port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+  selector:
+    app: {{ include "encryption-services.name" . }}
+    release: {{ .Release.Name }}

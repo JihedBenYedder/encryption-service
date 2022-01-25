@@ -1,0 +1,11 @@
+version: v1
+server:
+  port: 8085
+  servlet:
+    context-path: /encryptionservice/${version}
+    application-display-name: encryption-service
+
+security:
+  internal: "{bcrypt}$2a$10$sxU0q3AyCgJR7myQf4NZX.DwgAESAJgE4QyVm7MujOMlH.R/0vBeG"
+  encryptionKey: "testkey"
+

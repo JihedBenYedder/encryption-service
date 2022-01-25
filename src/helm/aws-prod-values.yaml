@@ -1,0 +1,47 @@
+# Default values for encryption-service
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 3
+
+image:
+  repository: 683559337915.dkr.ecr.eu-central-1.amazonaws.com/encryption-services
+  tag: ((.Env.DOCKER_IMAGE_TAG))
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 8080
+
+resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  limits:
+    cpu: 1000m
+    memory: 750Mi
+  requests:
+    cpu: 100m
+    memory: 500Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+host_name: "apigw-ccp-prod-eu-central-1.aws.rccad.net"
+application_environment: "prod"
+datacenter_type: "aws"
+datacenter_location: "eu-central-1"
+
+dd_agent_enabled: "true"
+
+java_opts: "-Dccp.env=prod -Dspring.config.location=/configmaps/application.yml -Dspring.profiles.active=aws"
+
+security:
+  internal: "{bcrypt}$2a$10$BKRrFzx5d5RYciMiGwLdnONKwsUW8Z7dIER81fdNeGMgitcm3zXdK"

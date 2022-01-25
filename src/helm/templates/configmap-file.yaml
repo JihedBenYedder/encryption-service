@@ -1,0 +1,23 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap-file
+  labels:
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+data:
+  application.yml: |
+    version: v1
+    server:
+      port: 0
+      servlet:
+        context-path: /encryptionservice/${version}
+        application-display-name: encryptionservice
+      undertow:
+        worker-threads: {{ .Values.undertow_worker_threads | default 75 }}
+
+
+    security:
+      internal: "{{ .Values.security.internal }}"

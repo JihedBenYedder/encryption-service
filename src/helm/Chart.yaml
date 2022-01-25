@@ -1,0 +1,8 @@
+apiVersion: v1
+name: encryption-services
+version: ((.Env.HELM_CHART_VERSION))
+appVersion: "((.Env.HELM_CHART_APPVERSION))"
+description: Encryption Service Helm Chart
+maintainers:
+  - name: Jihed BEN YEDDER
+    email: jiedbenyedder@gmail.com
