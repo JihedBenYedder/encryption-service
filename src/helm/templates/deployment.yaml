@@ -32,15 +32,6 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          env:
-            - name: DD_AGENT_HOST
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP
-            - name: DOGSTATSD_HOST_IP
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP
           envFrom:
             - configMapRef:
                 name: {{ .Release.Name }}-configmap-env
@@ -69,43 +60,9 @@ spec:
     {{- end }}
     {{- with .Values.affinity }}
       affinity:
-{{ toYaml . | indent 8 }}
-    {{- end }}
-      affinity:
-
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: "app"
-                      operator: In
-                      values:
-                      - {{ include "encryption-services.name" . }}
-                topologyKey: "kubernetes.io/hostname"
-
-{{- if (eq .Values.application_environment "prod") }}
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: environment
-                operator: In
-                values:
-                - "prod"
-{{- else }}
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: environment
-                operator: NotIn
-                values:
-                - "prod"
-{{- end }}
-
-    {{- with .Values.tolerations }}
+        {{ toYaml . | indent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
       tolerations:
-{{ toYaml . | indent 8 }}
-    {{- end }}
+        {{ toYaml . | indent 8 }}
+      {{- end }}

@@ -7,19 +7,7 @@ metadata:
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
-data:
-  APPL_ENV: {{ .Values.application_environment }}
-
-  {{if eq .Values.dd_agent_enabled "true"}}
-  DD_TRACE_ENABLED: "{{ .Values.dd_agent_enabled }}"
-  DD_SERVICE_NAME: "{{ .Chart.Name }}"
-  DD_TRACE_GLOBAL_TAGS: "env:{{ .Values.application_environment }},datacenter:{{ .Values.datacenter_type }}-{{ .Values.datacenter_location }}"
-  DD_LOGS_INJECTION: "true"
-  DD_TRACE_ANALYTICS_ENABLED: "true"
-  DD_PROPAGATION_STYLE_INJECTION: "Datadog,B3"
-  DD_PROPAGATION_STYLE_EXTRACT: "Datadog,B3"
-  {{end}}
 
   # Java Opts values
-  JAVA_OPTS: "{{ .Values.java_opts }} -XX:MaxRAMPercentage=40 -XX:+PrintFlagsFinal {{if eq .Values.dd_agent_enabled "true"}}-javaagent:/opt/app/datadog/dd-java-agent.jar{{ end }}"
+  JAVA_OPTS: "{{ .Values.java_opts }}"
 

@@ -20,4 +20,4 @@ data:
 
 
     security:
-      internal: "{{ .Values.security.internal }}"
+      encryptionKey: {{ .Values.encryptionKey }}
