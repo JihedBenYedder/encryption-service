@@ -26,8 +26,8 @@ data:
     spring.cloud.vault:
       host: localhost
       port: 8200
-      scheme: https
-      uri: https://127.0.0.1:8200"
+      scheme: http
+      uri: 127.0.0.1
       authentication: TOKEN
       token: ${vault:secret/data/vault/token#VAULT_TOKEN}
       config:
