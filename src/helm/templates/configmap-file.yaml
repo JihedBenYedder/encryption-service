@@ -21,3 +21,7 @@ data:
 
     security:
       encryptionKey: {{ .Values.encryptionKey }}
+    spring:
+      cloud:
+        vault:
+          token: ${vault:secret/data/vault/token#VAULT_TOKEN}
