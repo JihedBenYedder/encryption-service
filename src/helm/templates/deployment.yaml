@@ -17,6 +17,7 @@ spec:
       labels:
         app: encrpytion-service
     spec:
+      serviceAccountName: encryption-app
       volumes:
         - name: {{ .Release.Name }}-configmap-file
           configMap:
