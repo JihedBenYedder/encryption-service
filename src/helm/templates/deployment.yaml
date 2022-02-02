@@ -19,7 +19,7 @@ spec:
     spec:
       initContainers:
         - name: {{ .Chart.Name }}-jks
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command:
             - keytool
