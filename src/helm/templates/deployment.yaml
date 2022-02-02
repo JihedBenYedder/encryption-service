@@ -32,12 +32,18 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /encryptionservice/v1/actuator/health
+            initialDelaySeconds: 50
+            periodSeconds: 20
           readinessProbe:
             httpGet:
               port: 8080
               path: /encryptionservice/v1/actuator/health
             initialDelaySeconds: 50
-            periodSeconds: 10
+            periodSeconds: 20
           volumeMounts:
             - name: {{ .Release.Name }}-configmap-file
               mountPath: /opt/config
