@@ -25,9 +25,9 @@ spec:
         environment: {{ .Values.application_environment }}
     spec:
       volumes:
-        - name: config
+        - name: {{ .Release.Name }}-configmap-file
           configMap:
-            name: "{{ .Release.Name }}-configmap-file"
+            name: {{ .Release.Name }}-configmap-file
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -50,8 +50,8 @@ spec:
               port: http
             initialDelaySeconds: 80
           volumeMounts:
-            - name: config
-              mountPath: /configmaps
+            - name: {{ .Release.Name }}-configmap-file
+              mountPath: /opt/config
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}

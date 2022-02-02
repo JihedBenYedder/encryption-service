@@ -23,7 +23,7 @@ tolerations: []
 affinity: {}
 
 
-java_opts: "-Dspring.config.location=/configmaps/application.yml"
+java_opts: -Dspring.config.location=/opt/config/application.yml
 
 security:
   encryptionKey: ""

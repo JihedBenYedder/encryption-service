@@ -8,6 +8,7 @@ metadata:
     release: {{ .Release.Name }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
 
+data:
   # Java Opts values
   JAVA_OPTS: "{{ .Values.java_opts }}"
 
