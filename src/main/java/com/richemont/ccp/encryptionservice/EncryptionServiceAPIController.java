@@ -30,7 +30,7 @@ public class EncryptionServiceAPIController {
             String encryptedKey = encryptionService.encrypt(key);
             returnObject.put(encryptedKey, encryptedVal);
 		}
-		return ResponseEntity.of(Optional.of(returnObject.toString()));
+		return ResponseEntity.ok(returnObject.toString());
 	}
 
 	@RequestMapping(path = "/decrypt", method = RequestMethod.POST)
@@ -44,6 +44,6 @@ public class EncryptionServiceAPIController {
 			String val = encryptionService.decrypt(jsonpObject.get(encryptedkey).toString());
 			returnObject.put(decryptedKey, val);
 		}
-		return ResponseEntity.of(Optional.of(returnObject.toString()));
+		return ResponseEntity.ok(returnObject.toString());
 	}
 }
