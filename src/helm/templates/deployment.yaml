@@ -77,8 +77,10 @@ spec:
           volumeMounts:
             - name: {{ .Release.Name }}-configmap-file
               mountPath: /opt/config
-            - name: vault-jks-cacert
+            - name: vault-cacert
               mountPath: /vault/cacert
+            - name: vault-jks-cacert
+              mountPath: /vault/jkscacert
 
           resources:
 {{ toYaml .Values.resources | indent 12 }}
