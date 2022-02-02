@@ -35,7 +35,7 @@ spec:
           readinessProbe:
             httpGet:
               port: 8080
-              path: "/actuator/health/readiness"
+              path: /encryptionservice/v1/actuator/health
             initialDelaySeconds: 50
             periodSeconds: 10
           volumeMounts:
