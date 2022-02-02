@@ -1,6 +1,16 @@
-FROM openjdk:8-jdk-alpine
-VOLUME /tmp
+FROM openjdk:11-jdk-slim
+
+COPY entrypoint.sh /opt/app/
+
+COPY /target/encryption-service*.jar  /opt/app/app.jar
+
+# Java Options (GC, Memory, ...)
+ENV JAVA_OPTS ""
+
 EXPOSE 8080
-ARG JAR_FILE
-ADD ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+
+WORKDIR /opt/app
+
+RUN chmod +x /opt/app/entrypoint.sh
+
+ENTRYPOINT ["sh","entrypoint.sh"]
