@@ -22,9 +22,7 @@ spec:
         - name: {{ .Release.Name }}-configmap-file
           configMap:
             name: {{ .Release.Name }}-configmap-file
-        - name: vault-cacert
-          secret:
-            secretName: { { .Release.Name } }-vault-tls
+
         - name: vault-jks-cacert
           emptyDir: { }
       containers:
@@ -38,6 +36,13 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
+          env:
+            - name: VAULT_URI
+              value: https://{{ .Release.Name }}-vault:8200
+            - name: VAULT_SSL_TRUST_STORE
+              value: file:///vault/cacert/ca.jks
+            - name: VAULT_SSL_TRUST_STORE_PASSWORD
+              value: { { derivePassword 1 "long" (.Release.Time | toString) "banzai" "cacert" } }
           livenessProbe:
             httpGet:
               port: 8080
@@ -53,6 +58,9 @@ spec:
           volumeMounts:
             - name: {{ .Release.Name }}-configmap-file
               mountPath: /opt/config
+            - name: vault-jks-cacert
+              mountPath: /vault/cacert
+
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}
