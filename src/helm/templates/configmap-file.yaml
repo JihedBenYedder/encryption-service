@@ -27,7 +27,7 @@ data:
       host: localhost
       port: 8200
       scheme: http
-      uri: 127.0.0.1
+      uri: http://127.0.0.1:8200
       authentication: TOKEN
       token: ${vault:secret/data/vault/token#VAULT_TOKEN}
       config:
