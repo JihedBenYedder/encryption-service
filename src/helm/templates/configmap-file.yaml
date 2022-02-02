@@ -21,6 +21,11 @@ data:
     
     spring.cloud.vault:
       host: localhost
+      config.lifecycle: 
+        enabled: true
+        min-renewal: 10s
+        expiry-threshold: 30s
+      kv.enabled: false
       uri: http://vault.vault:8200
       authentication: KUBERNETES
       kubernetes:
