@@ -1,6 +1,5 @@
 package com.richemont.ccp.encryptionservice;
 
-import com.fasterxml.jackson.databind.util.BeanUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.vault.core.VaultOperations;
 import org.springframework.vault.support.Ciphertext;
