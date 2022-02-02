@@ -17,14 +17,48 @@ spec:
       labels:
         app: encrpytion-service
     spec:
+      initContainers:
+        - name: { { .Chart.Name } }-jks
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: { { .Values.image.pullPolicy } }
+          command:
+            - keytool
+             - -importcert
+             - -storepass
+             - {{ derivePassword 1 "long" (.Release.Time | toString) "banzai" "cacert" }}
+             - -noprompt
+             - -file
+             - /vault/cacert/ca.crt
+             - -keystore
+             - /vault/jkscacert/ca.jks
+          volumeMounts:
+            - mountPath: /vault/cacert
+              name: vault-cacert
+            - mountPath: /vault/jkscacert
+              name: vault-jks-cacert
       volumes:
         - name: {{ .Release.Name }}-configmap-file
           configMap:
             name: {{ .Release.Name }}-configmap-file
+        - name: vault-cacert
+          secret:
+            secretName: { { .Release.Name } }-vault-tls
+        - name: vault-jks-cacert
+          emptyDir: { }
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: VAULT_URI
+              value: https://{{ .Release.Name }}-vault:8200
+            - name: VAULT_SSL_TRUST_STORE
+              value: file:///vault/cacert/ca.jks
+            - name: VAULT_SSL_TRUST_STORE_PASSWORD
+              value: { { derivePassword 1 "long" (.Release.Time | toString) "banzai" "cacert" } }
+          volumeMounts:
+            - mountPath: /vault/cacert
+              name: vault-jks-cacert
           envFrom:
             - configMapRef:
                 name: {{ .Release.Name }}-configmap-env
