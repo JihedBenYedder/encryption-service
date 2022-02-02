@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: 117677030399.dkr.ecr.us-east-2.amazonaws.com/encryption-services
+  repository: 117677030399.dkr.ecr.us-east-2.amazonaws.com/encryptionservice
   tag: latest
   pullPolicy: IfNotPresent
 
