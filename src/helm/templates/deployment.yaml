@@ -20,7 +20,7 @@ spec:
       initContainers:
         - name: {{ .Chart.Name }}-jks
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: { { .Values.image.pullPolicy } }
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           command:
             - keytool
             - -importcert
