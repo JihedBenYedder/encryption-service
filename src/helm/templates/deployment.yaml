@@ -36,13 +36,13 @@ spec:
             httpGet:
               port: 8080
               path: /encryptionservice/v1/actuator/health
-            initialDelaySeconds: 30
+            initialDelaySeconds: 50
             periodSeconds: 10
           readinessProbe:
             httpGet:
               port: 8080
               path: /encryptionservice/v1/actuator/health
-            initialDelaySeconds: 30
+            initialDelaySeconds: 50
             periodSeconds: 10
           volumeMounts:
             - name: {{ .Release.Name }}-configmap-file
