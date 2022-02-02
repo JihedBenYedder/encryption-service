@@ -30,6 +30,7 @@ data:
       uri: https://localhost:8200
       connection-timeout: 5000
       read-timeout: 15000
+      token: ${vault:secret/data/vault/token#VAULT_TOKEN}
       config:
         order: -10
 
