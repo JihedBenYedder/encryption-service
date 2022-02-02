@@ -7,4 +7,7 @@ server:
 
 security:
   encryptionKey: "testkey"
-
+spring:
+  cloud:
+    vault:
+      token: 12234-45-454-454
