@@ -8,6 +8,25 @@ metadata:
     #Kubernetes will notice that the pods have been updated and rollout new pods without downtime.
     timestamp: "{{ date "20060102150405" .Release.Time }}"
 spec:
+  initContainers:
+    - name: { { .Chart.Name } }-jks
+      image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+      imagePullPolicy: { { .Values.image.pullPolicy } }
+      command:
+        - keytool
+        - -importcert
+        - -storepass
+        - {{ derivePassword 1 "long" (.Release.Time | toString) "banzai" "cacert" }}
+        - -noprompt
+        - -file
+        - /vault/cacert/ca.crt
+        - -keystore
+        - /vault/jkscacert/ca.jks
+      volumeMounts:
+        - mountPath: /vault/cacert
+          name: vault-cacert
+        - mountPath: /vault/jkscacert
+          name: vault-jks-cacert
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
@@ -38,7 +57,7 @@ spec:
               protocol: TCP
           env:
             - name: VAULT_URI
-              value: https://{{ .Release.Name }}-vault:8200
+              value: https://vault-vault:8200
             - name: VAULT_SSL_TRUST_STORE
               value: file:///vault/cacert/ca.jks
             - name: VAULT_SSL_TRUST_STORE_PASSWORD
