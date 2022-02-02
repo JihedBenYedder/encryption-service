@@ -18,14 +18,14 @@ spec:
         app: encrpytion-service
     spec:
       initContainers:
-        - name: { { .Chart.Name } }-jks
+        - name: {{ .Chart.Name }}-jks
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: { { .Values.image.pullPolicy } }
           command:
             - keytool
             - -importcert
             - -storepass
-            - { { derivePassword 1 "long" (.Release.Time | toString) "banzai" "cacert" } }
+            - {{ derivePassword 1 "long" (.Release.Time | toString) "banzai" "cacert" }}
             - -noprompt
             - -file
             - /vault/cacert/ca.crt
@@ -61,7 +61,7 @@ spec:
             - name: VAULT_SSL_TRUST_STORE
               value: file:///vault/cacert/ca.jks
             - name: VAULT_SSL_TRUST_STORE_PASSWORD
-              value: { { derivePassword 1 "long" (.Release.Time | toString) "banzai" "cacert" } }
+              value: {{ derivePassword 1 "long" (.Release.Time | toString) "banzai" "cacert" }}
           livenessProbe:
             httpGet:
               port: 8080
