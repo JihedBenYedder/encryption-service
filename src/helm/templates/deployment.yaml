@@ -34,14 +34,16 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /encryptionservice/v1/actuator/health
-              port: http
-            initialDelaySeconds: 80
+              port: 8080
+              path: /hospital/beds/total
+            initialDelaySeconds: 30
+            periodSeconds: 10
           readinessProbe:
             httpGet:
-              path: /encryptionservice/v1/actuator/health
-              port: http
-            initialDelaySeconds: 80
+              port: 8080
+              path: /hospital/beds/total
+            initialDelaySeconds: 30
+            periodSeconds: 10
           volumeMounts:
             - name: {{ .Release.Name }}-configmap-file
               mountPath: /opt/config
