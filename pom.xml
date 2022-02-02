@@ -20,9 +20,9 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
         <project.version>1.0.0</project.version>
     </properties>
+    
     <developers>
         <developer>
             <id>Djo</id>
@@ -94,19 +94,8 @@
             <version>5.7</version>
         </dependency>
 
+
     </dependencies>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>nexus</id>
-            <url>https://nexus.richemont.com/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>nexus</id>
-            <url>https://nexus.richemont.com/content/repositories/releases</url>
-        </repository>
-    </distributionManagement>
-
 
     <build>
         <plugins>
