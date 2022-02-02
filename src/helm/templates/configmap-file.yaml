@@ -23,7 +23,13 @@ data:
 
     security:
       encryptionKey: {{ .Values.encryptionKey }}
-    spring:
-      cloud:
-        vault:
-          token: ${vault:secret/data/vault/token#VAULT_TOKEN}
+spring.cloud.vault:
+  host: localhost
+  port: 8200
+  scheme: https
+  uri: https://localhost:8200
+  connection-timeout: 5000
+  read-timeout: 15000
+  config:
+    order: -10
+
