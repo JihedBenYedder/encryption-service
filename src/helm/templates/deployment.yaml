@@ -7,18 +7,18 @@ metadata:
   annotations:
     checksum/config-file: {{ include (print $.Template.BasePath "/configmap-file.yaml") . | sha256sum }}
     checksum/config-env: {{ include (print $.Template.BasePath "/configmap-env.yaml") . | sha256sum }}
+    #Kubernetes will notice that the pods have been updated and rollout new pods without downtime.
+    timestamp: "{{ date "20060102150405" .Release.Time }}"
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: {{ include "encryption-services.name" . }}
-      release: {{ .Release.Name }}
   template:
     metadata:
       labels:
         app: {{ include "encryption-services.name" . }}
         release: {{ .Release.Name }}
-        environment: {{ .Values.application_environment }}
     spec:
       volumes:
         - name: {{ .Release.Name }}-configmap-file

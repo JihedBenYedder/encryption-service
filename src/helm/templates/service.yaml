@@ -4,9 +4,6 @@ metadata:
   name: {{ include "encryption-services.name" . }}
   labels:
     app: {{ include "encryption-services.name" . }}
-    chart: {{ include "encryption-services.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
 
 spec:
   type: {{ .Values.service.type }}
