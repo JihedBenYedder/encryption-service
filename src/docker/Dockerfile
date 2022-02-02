@@ -2,7 +2,7 @@ FROM @base.image@
 
 COPY entrypoint.sh /opt/app/
 
-COPY encryption-service-@project.version@.jar /opt/app/ccp-app.jar
+COPY /target/encryption-service*.jar  /opt/app/app.jar
 
 # Java Options (GC, Memory, ...)
 ENV JAVA_OPTS ""
