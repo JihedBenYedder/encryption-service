@@ -13,12 +13,11 @@ spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "encryption-services.name" . }}
+      app: encrpytion-service
   template:
     metadata:
       labels:
-        app: {{ include "encryption-services.name" . }}
-        release: {{ .Release.Name }}
+        app: encrpytion-service
     spec:
       volumes:
         - name: {{ .Release.Name }}-configmap-file
