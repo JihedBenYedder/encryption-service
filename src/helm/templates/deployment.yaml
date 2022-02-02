@@ -35,13 +35,13 @@ spec:
           livenessProbe:
             httpGet:
               port: 8080
-              path: /hospital/beds/total
+              path: /encryptionservice/v1/actuator/health
             initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
             httpGet:
               port: 8080
-              path: /hospital/beds/total
+              path: /encryptionservice/v1/actuator/health
             initialDelaySeconds: 30
             periodSeconds: 10
           volumeMounts:
