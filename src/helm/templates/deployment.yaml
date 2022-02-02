@@ -22,6 +22,11 @@ spec:
         - name: {{ .Release.Name }}-configmap-file
           configMap:
             name: {{ .Release.Name }}-configmap-file
+        - name: vault-cacert
+          secret:
+            secretName: { { .Release.Name } }-vault-tls
+        - name: vault-jks-cacert
+          emptyDir: { }
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
