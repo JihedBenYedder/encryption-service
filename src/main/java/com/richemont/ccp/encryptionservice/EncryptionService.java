@@ -1,5 +1,6 @@
 package com.richemont.ccp.encryptionservice;
 
+import com.fasterxml.jackson.databind.util.BeanUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.vault.core.VaultOperations;
 import org.springframework.vault.support.Ciphertext;
@@ -7,12 +8,6 @@ import org.springframework.vault.support.Plaintext;
 
 @Component
 public class EncryptionService {
-
-    private AesEncryptor aesEncryptor;
-
-    public EncryptionService(AesEncryptor aesEncryptor) {
-        this.aesEncryptor = aesEncryptor;
-    }
 
     public String encrypt(final String val) {
         VaultOperations vaultOps = BeanUtil.getBean(VaultOperations.class);
