@@ -28,7 +28,8 @@ data:
         vault:
           host: localhost
           uri: http://vault.vault:8200
-          authentication: KUBERNETES
+          authentication: TOKEN
+          token: ${vault:secret/data/vault/token#VAULT_TOKEN}
           kubernetes:
             role: encryption-app
 
