@@ -1,4 +1,4 @@
-FROM @base.image@
+FROM openjdk:11-jdk-slim
 
 COPY entrypoint.sh /opt/app/
 
@@ -15,4 +15,4 @@ RUN chmod +x /opt/app/entrypoint.sh
 
 USER docker_ro
 
-ENTRYPOINT ["/opt/app/entrypoint.sh"]
+ENTRYPOINT ["sh","entrypoint.sh"]
