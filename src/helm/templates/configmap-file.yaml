@@ -3,6 +3,10 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-configmap-file
+  annotations:
+    vault.security.banzaicloud.io/vault-addr: "https://vault.vault:8200"
+    vault.security.banzaicloud.io/vault-tls-secret: "vault-tls"
+    vault.security.banzaicloud.io/vault-role: "default"
   labels:
     run: {{ include "encryption-services.name" .}}
 data:
@@ -23,7 +27,6 @@ data:
       cloud:
         vault:
           host: localhost
-          kv.enabled: false
           uri: http://vault.vault:8200
           authentication: KUBERNETES
           kubernetes:
