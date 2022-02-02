@@ -27,7 +27,3 @@ java_opts: -Dspring.config.location=/opt/config/application.yml
 
 security:
   encryptionKey: ""
-spring:
-  cloud:
-    vault:
-      token: 1111-2222-4444-5555
