@@ -13,6 +13,4 @@ WORKDIR /opt/app
 
 RUN chmod +x /opt/app/entrypoint.sh
 
-USER docker_ro
-
 ENTRYPOINT ["sh","entrypoint.sh"]
