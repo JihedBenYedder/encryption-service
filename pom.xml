@@ -5,8 +5,7 @@
 
     <groupId>com.alpha</groupId>
     <artifactId>encryption-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <version>0.0.2-SNAPSHOT</version>
 
     <name>encryption-service</name>
     <description>Microservice responsible for encryption</description>
