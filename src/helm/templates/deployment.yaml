@@ -25,7 +25,7 @@ spec:
             - keytool
             - -importcert
             - -storepass
-            - {{ derivePassword 1 "long" (.Release.Time | toString) "banzai" "cacert" }}
+            - changeit
             - -noprompt
             - -file
             - /vault/cacert/ca.crt
