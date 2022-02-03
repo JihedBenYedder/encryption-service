@@ -31,7 +31,7 @@ data:
           authentication: TOKEN
           token: ${vault:secret/data/vault/token#VAULT_TOKEN}
           ssl:
-            trust-store: /vault/jkscacert/ca.jks
+            trust-store: file:/vault/jkscacert/ca.jks
             trust-store-password: changeit
           kubernetes:
             role: encryption-app
