@@ -38,10 +38,12 @@ spec:
               name: vault-jks-cacert
       serviceAccountName: encryption-app
       volumes:
-        - name: vault-cacert
-          emptyDir: { }
         - name: vault-jks-cacert
           emptyDir: { }
+        - name: vault-cacert
+          secret:
+            secretName: { { .Release.Name } }-vault-tls
+
         - name: {{ .Release.Name }}-configmap-file
           configMap:
             name: {{ .Release.Name }}-configmap-file
