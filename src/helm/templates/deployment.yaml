@@ -42,7 +42,7 @@ spec:
           emptyDir: { }
         - name: vault-cacert
           secret:
-            secretName: {{ .Release.Name }}-vault-tls
+            secretName: vault-tls
 
         - name: {{ .Release.Name }}-configmap-file
           configMap:
