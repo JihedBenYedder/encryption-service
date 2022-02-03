@@ -20,7 +20,7 @@
         <java.version>1.8</java.version>
         <project.version>1.0.0</project.version>
         <spring-cloud.version>2020.0.2</spring-cloud.version>
-        <jackson.version>2.9.5</jackson.version>
+        <jackson.version>2.8.6</jackson.version>
     </properties>
 
     <developers>
