@@ -78,6 +78,8 @@ spec:
               path: /encryptionservice/v1/actuator/health
             initialDelaySeconds: 50
             periodSeconds: 20
+          # Mount the Secret holding the generated self-signed certificate for Vault
+          # Create an ephemeral volume for holding the converted version of the ca.crt to jks
           volumeMounts:
             - name: {{ .Release.Name }}-configmap-file
               mountPath: /opt/config
