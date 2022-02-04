@@ -5,7 +5,6 @@ import org.springframework.vault.core.VaultOperations;
 import org.springframework.vault.support.Ciphertext;
 import org.springframework.vault.support.Plaintext;
 
-@Component
 public class EncryptionService {
 
     public String encrypt(final String val) {

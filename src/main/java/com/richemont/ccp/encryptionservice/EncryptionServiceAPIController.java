@@ -16,7 +16,6 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class EncryptionServiceAPIController {
 
-	@Autowired
 	private EncryptionService encryptionService;
 
 	@RequestMapping(path = "/encrypt", method = RequestMethod.POST)
