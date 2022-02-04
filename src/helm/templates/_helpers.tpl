@@ -24,6 +24,27 @@ If release name contains chart name it will be used as a full name.
 {{- end -}}
 {{- end -}}
 
+
+{{/*
+Common labels
+*/}}
+{{- define "encryption-service.labels" -}}
+helm.sh/chart: {{ include "encryption-service.chart" . }}
+{{ include "encryption-service.selectorLabels" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
+
+{{/*
+Selector labels
+*/}}
+{{- define "encryption-service.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "encryption-service.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
+
 {{/*
 Create chart name and version as used by the chart label.
 */}}
