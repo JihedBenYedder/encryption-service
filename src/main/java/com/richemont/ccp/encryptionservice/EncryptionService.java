@@ -9,17 +9,16 @@ import org.springframework.vault.support.Plaintext;
 public class EncryptionService {
 
     public String encrypt(final String val) {
-
         VaultOperations vaultOps = BeanUtil.getBean(VaultOperations.class);
         Plaintext plaintext = Plaintext.of(val);
-        String cipherText = vaultOps.opsForTransit().encrypt("customer", plaintext).getCiphertext();
+        String cipherText = vaultOps.opsForTransit().encrypt("genericData", plaintext).getCiphertext();
         return cipherText;
     }
 
     public String decrypt(final String val) {
         VaultOperations vaultOps = BeanUtil.getBean(VaultOperations.class);
         Ciphertext ciphertext = Ciphertext.of(val);
-        String plaintext = vaultOps.opsForTransit().decrypt("customer", ciphertext).asString();
+        String plaintext = vaultOps.opsForTransit().decrypt("genericData", ciphertext).asString();
         return plaintext;
     }
 }
