@@ -66,11 +66,6 @@ spec:
               value: file:///vault/cacert/ca.jks
             - name: VAULT_SSL_TRUST_STORE_PASSWORD
               value: changeit
-          livenessProbe:
-            httpGet:
-              port: http
-              path: /encryptionservice/v1/actuator/health
-            initialDelaySeconds: 50
           readinessProbe:
             httpGet:
               port: http

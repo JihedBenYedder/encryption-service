@@ -25,9 +25,11 @@ data:
     
     management:
       health:
+        livenessstate:
+          enabled: true
         solr:
           enabled: false
-    
+
     spring:
       cloud:
         vault:
