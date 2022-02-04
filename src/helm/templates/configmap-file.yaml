@@ -19,8 +19,6 @@ data:
       servlet:
         context-path: /encryption
         application-display-name: encryption
-      undertow:
-        worker-threads: {{ .Values.undertow_worker_threads | default 75 }}
 
     security:
       encryptionKey: {{ .Values.encryptionKey }}
