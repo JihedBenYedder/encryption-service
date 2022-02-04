@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: encryption-service
   labels:
-    {{- include "encryption-service.name" . | nindent 4 }}
+    {{- include "encryption-service.labels" . | nindent 4 }}
   annotations:
     checksum/config-file: {{ include (print $.Template.BasePath "/configmap-file.yaml") . | sha256sum }}
     checksum/config-env: {{ include (print $.Template.BasePath "/configmap-env.yaml") . | sha256sum }}
