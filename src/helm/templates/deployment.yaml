@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "encryption-service.name" . }}
+  labels:
+    {{ include "encryption-service.name" . | nindent 4 }}
   annotations:
     checksum/config-file: {{ include (print $.Template.BasePath "/configmap-file.yaml") . | sha256sum }}
     checksum/config-env: {{ include (print $.Template.BasePath "/configmap-env.yaml") . | sha256sum }}
@@ -11,11 +13,11 @@ spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: encrpytion-service
+      app:  {{ include "encryption-service.name" . }}
   template:
     metadata:
       labels:
-        app: encrpytion-service
+        app:  encryption-service
     spec:
       initContainers:
         - name: {{ .Chart.Name }}-jks
