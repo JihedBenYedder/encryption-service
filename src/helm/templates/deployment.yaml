@@ -68,12 +68,12 @@ spec:
               value: changeit
           livenessProbe:
             httpGet:
-              port: 8080
+              port: http
               path: /encryptionservice/v1/actuator/health
             initialDelaySeconds: 50
           readinessProbe:
             httpGet:
-              port: 8080
+              port: http
               path: /encryptionservice/v1/actuator/health
             initialDelaySeconds: 50
           # Mount the Secret holding the generated self-signed certificate for Vault
