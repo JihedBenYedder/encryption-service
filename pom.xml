@@ -58,10 +58,7 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-vault-config</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>com.kiwigrid</groupId>
             <artifactId>helm-maven-plugin</artifactId>
