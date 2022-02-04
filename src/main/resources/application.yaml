@@ -8,17 +8,7 @@ server:
 security:
   encryptionKey: "testkey"
 
-
-management:
-  health:
-    solr:
-      enabled=true
-
-
 spring:
   cloud:
-    config: false
     vault:
-      host: localhost
-      uri: https://localhost:8200
       token: trztr
