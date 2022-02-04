@@ -111,6 +111,10 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
                 <groupId>com.kiwigrid</groupId>
                 <artifactId>helm-maven-plugin</artifactId>
                 <version>5.7</version>
