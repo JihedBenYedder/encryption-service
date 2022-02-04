@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "encryption-service.name" . }}
+  name: encryption-service
   labels:
     {{ include "encryption-service.name" . | nindent 4 }}
   annotations:
