@@ -3,10 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.richemont.ccp</groupId>
+    <groupId>com.alpha</groupId>
     <artifactId>encryption-service</artifactId>
-    <version>1.0</version>
-    <packaging>jar</packaging>
+    <version>0.0.6-SNAPSHOT</version>
 
     <name>encryption-service</name>
     <description>Microservice responsible for encryption</description>
@@ -26,14 +25,25 @@
 
     </properties>
 
+    <developers>
+        <developer>
+            <id>Djo</id>
+            <name>Jihed Ben</name>
+            <email>djo@example.com</email>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
 
     <dependencies>
         <!-- vault
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-vault-config</artifactId>
-            <version>2.2.3.RELEASE</version>
-        </dependency> -->
+          <dependency>
+              <groupId>org.springframework.cloud</groupId>
+              <artifactId>spring-cloud-starter-vault-config</artifactId>
+              <version>2.2.3.RELEASE</version>
+          </dependency> -->
 
         <!-- spring -->
         <dependency>
@@ -80,18 +90,44 @@
             <version>0.0.20131108.vaadin1</version>
         </dependency>
 
+        <!-- helm plugins -->
+        <dependency>
+            <groupId>com.kiwigrid</groupId>
+            <artifactId>helm-maven-plugin</artifactId>
+            <version>5.7</version>
+        </dependency>
     </dependencies>
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>nexus</id>
-            <url>https://nexus.richemont.com/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>nexus</id>
-            <url>https://nexus.richemont.com/content/repositories/releases</url>
-        </repository>
-    </distributionManagement>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>2.13.1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.13.1</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 
 
     <build>
@@ -99,190 +135,26 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>build-info</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-resources</id>
-                        <!-- here the phase you need -->
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>src/docker</directory>
-                                    <filtering>true</filtering>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.4.2</version>
+                <groupId>com.kiwigrid</groupId>
+                <artifactId>helm-maven-plugin</artifactId>
+                <version>5.7</version>
                 <configuration>
-                    <repository>${registry}/${project.artifactId}</repository>
-                    <tag>${project.version}</tag>
-                    <contextDirectory>${project.build.directory}</contextDirectory>
+                    <chartDirectory>${project.basedir}</chartDirectory>
+                    <chartVersion>${project.version}</chartVersion>
+                    <useLocalHelmBinary>true</useLocalHelmBinary>
+                    <autoDetectLocalHelmBinary>true</autoDetectLocalHelmBinary>
+                    <values>
+                        <overrides>
+                            <component1.install.path>/opt/component1</component1.install.path>
+                        </overrides>
+                        <yamlFile>${project.basedir}/src/helm/Chart.yaml</yamlFile>
+                    </values>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.codehaus.plexus</groupId>
-                        <artifactId>plexus-archiver</artifactId>
-                        <version>3.4</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>com.sun.activation</groupId>
-                        <artifactId>javax.activation</artifactId>
-                        <version>1.2.0</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>tag-latest</id>
-                        <phase>none</phase>
-                        <goals>
-                            <goal>tag</goal>
-                        </goals>
-                        <configuration>
-                            <tag>latest</tag>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>push-latest</id>
-                        <phase>none</phase>
-                        <goals>
-                            <goal>push</goal>
-                        </goals>
-                        <configuration>
-                            <tag>latest</tag>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>push-version</id>
-                        <phase>none</phase>
-                        <goals>
-                            <goal>push</goal>
-                        </goals>
-                        <configuration>
-                            <tag>${project.version}</tag>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
-    </build>
 
-    <profiles>
-        <profile>
-            <id>coverage</id>
-            <build>
-                <pluginManagement>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.jacoco</groupId>
-                            <artifactId>jacoco-maven-plugin</artifactId>
-                            <version>${jacoco.version}</version>
-                        </plugin>
-                    </plugins>
-                </pluginManagement>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-                            <argLine>${jacoco.agent.ut.arg} -Dfile.encoding=${project.build.sourceEncoding}
-                            </argLine>
-                            <!-- Specific to generate mapping between tests and covered code-->
-                            <properties>
-                                <property>
-                                    <name>listener</name>
-                                    <value>org.sonar.java.jacoco.JUnitListener</value>
-                                </property>
-                            </properties>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>integration-test</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <argLine>-Xmx900m ${jacoco.agent.ut.arg} -Dfile.encoding=${project.build.sourceEncoding}
-                            </argLine>
-                            <properties>
-                                <property>
-                                    <name>listener</name>
-                                    <value>org.sonar.java.jacoco.JUnitListener</value>
-                                </property>
-                            </properties>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.jacoco</groupId>
-                        <artifactId>jacoco-maven-plugin</artifactId>
-                        <executions>
-                            <!-- Prepares a variable, jacoco.agent.ut.arg, that contains the info
-                                to be passed to the JVM hosting the code being tested. -->
-                            <execution>
-                                <id>prepare-ut-agent</id>
-                                <phase>process-test-classes</phase>
-                                <goals>
-                                    <goal>prepare-agent</goal>
-                                </goals>
-                                <configuration>
-                                    <destFile>${sonar.jacoco.reportPaths}</destFile>
-                                    <propertyName>jacoco.agent.ut.arg</propertyName>
-                                    <append>true</append>
-                                </configuration>
-                            </execution>
-                            <!-- Prepares a variable, jacoco.agent.it.arg, that contains the info
-                                to be passed to the JVM hosting the code being tested. -->
-                            <execution>
-                                <id>prepare-it-agent</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>prepare-agent</goal>
-                                </goals>
-                                <configuration>
-                                    <destFile>${sonar.jacoco.reportPaths}</destFile>
-                                    <propertyName>jacoco.agent.ut.arg</propertyName>
-                                    <append>true</append>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-            <dependencies>
-                <dependency>
-                    <groupId>org.sonarsource.java</groupId>
-                    <artifactId>sonar-jacoco-listeners</artifactId>
-                    <version>${sonar-jacoco-listeners.version}</version>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
+    </build>
 
 </project>
