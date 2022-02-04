@@ -27,7 +27,7 @@ data:
       endpoint:
         web:
           exposure:
-            include: *
+            include: health
         health:
           show-details: always
           probes:
