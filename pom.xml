@@ -5,7 +5,7 @@
 
     <groupId>com.alpha</groupId>
     <artifactId>encryption</artifactId>
-    <version>0.0.7-SNAPSHOT</version>
+    <version>0.0.8-SNAPSHOT</version>
 
     <name>encryption</name>
     <description>Microservice responsible for encryption</description>
