@@ -1,4 +1,4 @@
-package com.richemont.ccp.encryptionservice;
+package com.alpha.encryptionservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

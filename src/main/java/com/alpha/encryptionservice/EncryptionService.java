@@ -1,4 +1,4 @@
-package com.richemont.ccp.encryptionservice;
+package com.alpha.encryptionservice;
 
 import org.springframework.stereotype.Component;
 import org.springframework.vault.core.VaultOperations;

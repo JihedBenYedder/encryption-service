@@ -20,6 +20,11 @@ tolerations: []
 
 affinity: {}
 
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
 
 java_opts: -Dspring.config.location=/opt/config/application.yml
 

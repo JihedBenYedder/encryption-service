@@ -1,4 +1,4 @@
-package com.richemont.ccp.encryptionservice;
+package com.alpha.encryptionservice;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

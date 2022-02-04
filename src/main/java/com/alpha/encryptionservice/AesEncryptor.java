@@ -1,4 +1,4 @@
-package com.richemont.ccp.encryptionservice;
+package com.alpha.encryptionservice;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

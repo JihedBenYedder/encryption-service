@@ -1,4 +1,4 @@
-package com.richemont.ccp.encryptionservice;
+package com.alpha.encryptionservice;
 
 import org.json.JSONException;
 import org.json.JSONObject;
