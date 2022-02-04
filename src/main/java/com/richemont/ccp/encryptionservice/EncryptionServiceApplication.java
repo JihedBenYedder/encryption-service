@@ -11,16 +11,9 @@ import javax.annotation.PostConstruct;
 @SpringBootApplication
 public class EncryptionServiceApplication {
 
-	@Autowired
-	private SessionManager sessionManager;
-
 	public static void main(String[] args) {
 		SpringApplication.run(EncryptionServiceApplication.class, args);
 	}
 
-	@PostConstruct
-	public void initIt() throws Exception {
-		System.out.println("Got Vault Token: " + sessionManager.getSessionToken().getToken());
-	}
 
 }
