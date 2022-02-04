@@ -23,6 +23,8 @@ data:
     security:
       encryptionKey: {{ .Values.encryptionKey }}
     
+    management.health.solr.enabled=true
+    
     spring:
       cloud:
         vault:
