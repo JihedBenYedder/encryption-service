@@ -38,23 +38,13 @@ spec:
             - mountPath: /vault/jkscacert
               name: vault-jks-cacert
       serviceAccountName: encryption-app
-      volumes:
-        - name: vault-jks-cacert
-          emptyDir: { }
-        - name: vault-cacert
-          secret:
-            secretName: vault-tls
-
-        - name: {{ .Release.Name }}-configmap-file
-          configMap:
-            name: {{ .Release.Name }}-configmap-file
 
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
-      { { - end } }
+      {{- end }}
       securityContext:
-        { { - toYaml .Values.podSecurityContext | nindent 8 } }
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -90,14 +80,23 @@ spec:
               mountPath: /vault/cacert
             - name: vault-jks-cacert
               mountPath: /vault/jkscacert
+      volumes:
+        - name: vault-jks-cacert
+          emptyDir: { }
+        - name: vault-cacert
+          secret:
+            secretName: vault-tls
 
-          resources:
-{{ toYaml .Values.resources | indent 12 }}
-    {{- with .Values.nodeSelector }}
+        - name: {{ .Release.Name }}-configmap-file
+          configMap:
+            name: {{ .Release.Name }}-configmap-file
+      resources:
+      {{ toYaml .Values.resources | indent 12 }}
+      {{- with .Values.nodeSelector }}
       nodeSelector:
-{{ toYaml . | indent 8 }}
-    {{- end }}
-    {{- with .Values.affinity }}
+      {{ toYaml . | indent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
       affinity:
         {{ toYaml . | indent 8 }}
       {{- end }}
