@@ -8,17 +8,17 @@ server:
 security:
   encryptionKey: "testkey"
 
+
 management:
   health:
     solr:
-      enabled=true:
+      enabled=true
+
 
 spring:
   cloud:
+    config: false
     vault:
-      profiles: dev
-      scheme: http
-      port: 1111
-      host: 1.1.1.1
-      authentication: token
-      token: s3cr3t
+      host: localhost
+      uri: https://localhost:8200
+      token: trztr
