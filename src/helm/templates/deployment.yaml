@@ -61,6 +61,12 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /encryption/health
+            initialDelaySeconds: 30
+            periodSeconds: 10
           env:
             - name: VAULT_URI
               value: https://vault.vault:8200
