@@ -1,4 +1,4 @@
-package com.alpha.encryptionservice;
+package com.alpha.encryption;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/")
-public class EncryptionServiceAPIController {
+public class EncryptionAPIController {
 
 	@Autowired
 	private EncryptionService encryptionService;

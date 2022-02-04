@@ -1,4 +1,4 @@
-package com.alpha.encryptionservice;
+package com.alpha.encryption;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.alpha.encryptionservice;
+package com.alpha.encryption;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
