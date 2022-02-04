@@ -15,7 +15,7 @@ data:
     server:
       port: 8080
       servlet:
-        context-path: /encryptionservice/${version}
+        contextPath: /encryptionservice/${version}
         application-display-name: encryptionservice
       undertow:
         worker-threads: {{ .Values.undertow_worker_threads | default 75 }}
