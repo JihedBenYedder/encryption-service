@@ -24,6 +24,7 @@ data:
       encryptionKey: {{ .Values.encryptionKey }}
     
     management:
+      context-path: /manage
       endpoints:
         enabled-by-default: false
       endpoint:
