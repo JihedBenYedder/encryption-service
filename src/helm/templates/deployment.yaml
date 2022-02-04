@@ -66,11 +66,6 @@ spec:
               value: file:///vault/cacert/ca.jks
             - name: VAULT_SSL_TRUST_STORE_PASSWORD
               value: changeit
-          readinessProbe:
-            httpGet:
-              port: 8080
-              path: /encryptionservice/v1/actuator/health
-            initialDelaySeconds: 50
           # Mount the Secret holding the generated self-signed certificate for Vault
           # Create an ephemeral volume for holding the converted version of the ca.crt to jks
           volumeMounts:

@@ -22,21 +22,6 @@ data:
 
     security:
       encryptionKey: {{ .Values.encryptionKey }}
-    
-    management:
-      context-path: /manage
-      endpoints:
-        enabled-by-default: false
-      endpoint:
-        health:
-          enabled: true
-          probes:
-            enabled: true
-          group:
-            liveness:
-              include: "livenessStateProbeIndicator"
-            readiness:
-              include: "readinessStateProbeIndicator"
 
     spring:
       cloud:
