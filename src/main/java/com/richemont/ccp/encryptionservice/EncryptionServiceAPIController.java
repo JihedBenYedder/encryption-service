@@ -20,30 +20,12 @@ public class EncryptionServiceAPIController {
 	private EncryptionService encryptionService;
 
 	@RequestMapping(path = "/encrypt", method = RequestMethod.POST)
-	public ResponseEntity<String> encrypt(final @RequestBody String str) throws JSONException {
-		JSONObject jsonpObject = new JSONObject(str);
-		Iterator<String> keys = jsonpObject.keys();
-		JSONObject returnObject = new JSONObject();
-		while (keys.hasNext()) {
-			String key = keys.next();
-			String encryptedVal = encryptionService.encrypt(jsonpObject.get(key).toString());
-            String encryptedKey = encryptionService.encrypt(key);
-            returnObject.put(encryptedKey, encryptedVal);
-		}
-		return ResponseEntity.ok(returnObject.toString());
+	public String encrypt(final @RequestBody String str) throws JSONException {
+	   return "ds";
 	}
 
 	@RequestMapping(path = "/decrypt", method = RequestMethod.POST)
-	public ResponseEntity<String> decrypt(final @RequestBody String str) throws JSONException {
-		JSONObject jsonpObject = new JSONObject(str);
-		Iterator<String> keys = jsonpObject.keys();
-		JSONObject returnObject = new JSONObject();
-		while (keys.hasNext()) {
-			String encryptedkey = keys.next();
-            String decryptedKey = encryptionService.decrypt(encryptedkey);
-			String val = encryptionService.decrypt(jsonpObject.get(encryptedkey).toString());
-			returnObject.put(decryptedKey, val);
-		}
-		return ResponseEntity.ok(returnObject.toString());
+	public String decrypt(final @RequestBody String str) throws JSONException {
+		return "ds";
 	}
 }
