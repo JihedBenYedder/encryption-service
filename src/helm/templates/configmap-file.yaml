@@ -26,10 +26,11 @@ data:
     management:
       endpoint:
         health:
+          show-details: always
           probes:
             enabled: true
       health:
-        readinessstate:
+        readynessstate:
           enabled: true
         solr:
           enabled: false
