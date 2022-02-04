@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/")
 public class EncryptionServiceAPIController {
 
 	@Autowired
