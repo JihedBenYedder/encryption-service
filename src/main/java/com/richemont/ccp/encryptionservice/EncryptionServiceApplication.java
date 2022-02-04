@@ -8,7 +8,7 @@ import org.springframework.vault.authentication.SessionManager;
 
 import javax.annotation.PostConstruct;
 
-@SpringBootApplication(exclude=JacksonAutoConfiguration.class)
+@SpringBootApplication
 public class EncryptionServiceApplication {
 
 	@Autowired
