@@ -4,11 +4,6 @@ metadata:
   name: encryption-service
   labels:
     {{- include "encryption-service.labels" . | nindent 4 }}
-  annotations:
-    checksum/config-file: {{ include (print $.Template.BasePath "/configmap-file.yaml") . | sha256sum }}
-    checksum/config-env: {{ include (print $.Template.BasePath "/configmap-env.yaml") . | sha256sum }}
-    #Kubernetes will notice that the pods have been updated and rollout new pods without downtime.
-    timestamp: "{{ date "20060102150405" .Release.Time }}"
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -18,6 +13,11 @@ spec:
     metadata:
       labels:
         app: encryption-service
+      annotations:
+        checksum/config-file: { { include (print $.Template.BasePath "/configmap-file.yaml") . | sha256sum } }
+        checksum/config-env: { { include (print $.Template.BasePath "/configmap-env.yaml") . | sha256sum } }
+        #Kubernetes will notice that the pods have been updated and rollout new pods without downtime.
+        timestamp: "{{ date "20060102150405" .Release.Time }}"
     spec:
       initContainers:
         - name: {{ .Chart.Name }}-jks
