@@ -18,12 +18,43 @@ spec:
         #Kubernetes will notice that the pods have been updated and rollout new pods without downtime.
         timestamp: "{{ date "20060102150405" .Release.Time }}"
     spec:
+      initContainers:
+        - name: {{ .Chart.Name }}-jks
+          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - keytool
+            - -importcert
+            - -storepass
+            - changeit
+            - -noprompt
+            - -file
+            - /vault/cacert/ca.crt
+            - -keystore
+            - /vault/jkscacert/ca.jks
+          volumeMounts:
+            - mountPath: /vault/cacert
+              name: vault-cacert
+            - mountPath: /vault/jkscacert
+              name: vault-jks-cacert
+      serviceAccountName: encryption-app
+      volumes:
+        - name: vault-jks-cacert
+          emptyDir: { }
+        - name: vault-cacert
+          secret:
+            secretName: vault-tls
+
+        - name: {{ .Release.Name }}-configmap-file
+          configMap:
+            name: {{ .Release.Name }}-configmap-file
+
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
-      {{- end }}
+      { { - end } }
       securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+        { { - toYaml .Values.podSecurityContext | nindent 8 } }
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -40,26 +71,37 @@ spec:
               path: /encryption/health
             initialDelaySeconds: 30
             periodSeconds: 10
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
           envFrom:
             - configMapRef:
                 name: {{ .Release.Name }}-configmap-env
+          env:
+            - name: VAULT_URI
+              value: https://vault.vault:8200
+            - name: VAULT_SSL_TRUST_STORE
+              value: file:///vault/cacert/ca.jks
+            - name: VAULT_SSL_TRUST_STORE_PASSWORD
+              value: changeit
+          # Mount the Secret holding the generated self-signed certificate for Vault
+          # Create an ephemeral volume for holding the converted version of the ca.crt to jks
           volumeMounts:
             - name: {{ .Release.Name }}-configmap-file
               mountPath: /opt/config
-      volumes:
-        - name: {{ .Release.Name }}-configmap-file
-          configMap:
-            name: {{ .Release.Name }}-configmap-file
+            - name: vault-cacert
+              mountPath: /vault/cacert
+            - name: vault-jks-cacert
+              mountPath: /vault/jkscacert
+
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
       nodeSelector:
-      { { toYaml . | indent 8 } }
-      { { - end } }
-      { { - with .Values.affinity } }
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
       affinity:
-        { { toYaml . | indent 8 } }
-      { { - end } }
-      { { - with .Values.tolerations } }
+        {{ toYaml . | indent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
       tolerations:
-        { { toYaml . | indent 8 } }
-      { { - end } }
+        {{ toYaml . | indent 8 }}
+      {{- end }}
