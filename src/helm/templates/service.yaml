@@ -13,5 +13,5 @@ spec:
       targetPort: http
       protocol: TCP
   selector:
-    app: encryption-service.name
+    app: encryption-service
     release: {{ .Release.Name }}
