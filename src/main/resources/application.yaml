@@ -2,8 +2,8 @@ version: v1
 server:
   port: 8085
   servlet:
-    context-path: /encryptionservice/${version}
-    application-display-name: encryption-service
+    context-path: /encryption/${version}
+    application-display-name: encryption
 
 security:
   encryptionKey: "testkey"

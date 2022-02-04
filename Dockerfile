@@ -2,7 +2,7 @@ FROM openjdk:11-jdk-slim
 
 COPY entrypoint.sh /opt/app/
 
-COPY /target/encryption-service*.jar  /opt/app/app.jar
+COPY /target/encryption*.jar  /opt/app/app.jar
 
 # Java Options (GC, Memory, ...)
 ENV JAVA_OPTS ""

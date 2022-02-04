@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.alpha</groupId>
-    <artifactId>encryption-service</artifactId>
+    <artifactId>encryption</artifactId>
     <version>0.0.7-SNAPSHOT</version>
 
-    <name>encryption-service</name>
+    <name>encryption</name>
     <description>Microservice responsible for encryption</description>
 
     <parent>

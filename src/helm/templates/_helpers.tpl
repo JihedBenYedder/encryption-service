@@ -2,7 +2,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "encryption-service.name" -}}
+{{- define "encryption.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -11,7 +11,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "encryption-service.fullname" -}}
+{{- define "encryption.fullname" -}}
 {{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
@@ -28,9 +28,9 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Common labels
 */}}
-{{- define "encryption-service.labels" -}}
-helm.sh/chart: {{ include "encryption-service.chart" . }}
-{{ include "encryption-service.selectorLabels" . }}
+{{- define "encryption.labels" -}}
+helm.sh/chart: {{ include "encryption.chart" . }}
+{{ include "encryption.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -40,14 +40,14 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "encryption-service.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "encryption-service.name" . }}
+{{- define "encryption.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "encryption.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "encryption-service.chart" -}}
+{{- define "encryption.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
