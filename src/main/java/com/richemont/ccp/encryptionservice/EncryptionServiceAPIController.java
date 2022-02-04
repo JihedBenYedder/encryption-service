@@ -19,12 +19,12 @@ public class EncryptionServiceAPIController {
 	private EncryptionService encryptionService;
 
 	@RequestMapping(path = "/encrypt", method = RequestMethod.POST)
-	public String encrypt(final @RequestBody String str) throws JSONException {
+	public String encrypt(final @RequestBody String str) {
 	   return "ds";
 	}
 
 	@RequestMapping(path = "/decrypt", method = RequestMethod.POST)
-	public String decrypt(final @RequestBody String str) throws JSONException {
+	public String decrypt(final @RequestBody String str)  {
 		return "ds";
 	}
 }
