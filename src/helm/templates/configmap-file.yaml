@@ -24,20 +24,18 @@ data:
       encryptionKey: {{ .Values.encryptionKey }}
     
     management:
+      endpoints:
+        enabled-by-default: false
       endpoint:
-        web:
-          exposure:
-            include: "*"
         health:
           enabled: true
-          show-details: always
           probes:
             enabled: true
-      health:
-        readinessstate:
-          enabled: true
-        solr:
-          enabled: false
+          group:
+            liveness:
+              include: "livenessStateProbeIndicator"
+            readiness:
+              include: "readinessStateProbeIndicator"
 
     spring:
       cloud:
