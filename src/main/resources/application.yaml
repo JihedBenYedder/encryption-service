@@ -7,6 +7,12 @@ server:
 
 security:
   encryptionKey: "testkey"
+
+management:
+  health:
+    solr:
+      enabled=true:
+
 spring:
   cloud:
     vault:
