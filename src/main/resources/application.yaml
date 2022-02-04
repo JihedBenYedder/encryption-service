@@ -10,4 +10,9 @@ security:
 spring:
   cloud:
     vault:
-      token: 12234-45-454-454
+      profiles: dev
+      scheme: http
+      port: 1111
+      host: 1.1.1.1
+      authentication: token
+      token: s3cr3t
