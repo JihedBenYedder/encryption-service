@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "encryption-services.name" . }}
+  name: {{ include "encryption-service.name" . }}
   labels:
-    app: {{ include "encryption-services.name" . }}
+    app: {{ include "encryption-service.name" . }}
 
 spec:
   type: {{ .Values.service.type }}
@@ -13,5 +13,5 @@ spec:
       targetPort: http
       protocol: TCP
   selector:
-    app: {{ include "encryption-services.name" . }}
+    app: {{ include "encryption-service.name" . }}
     release: {{ .Release.Name }}

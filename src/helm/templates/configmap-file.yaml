@@ -8,7 +8,7 @@ metadata:
     vault.security.banzaicloud.io/vault-tls-secret: "vault-tls"
     vault.security.banzaicloud.io/vault-role: "default"
   labels:
-    run: {{ include "encryption-services.name" .}}
+    run: {{ include "encryption-service.name" .}}
 data:
   application.yml: |
     version: v1
