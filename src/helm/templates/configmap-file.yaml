@@ -25,6 +25,9 @@ data:
     
     management:
       endpoint:
+        web:
+          exposure:
+            include: *
         health:
           show-details: always
           probes:
