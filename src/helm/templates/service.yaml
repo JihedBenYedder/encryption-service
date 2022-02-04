@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: {{ include "encryption-service.name" . }}
   labels:
-    app: {{ include "encryption-service.name" . }}
+    run: {{ include "encryption-service.name" . }}
 
 spec:
   type: {{ .Values.service.type }}

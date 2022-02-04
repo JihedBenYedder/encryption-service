@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       labels:
-        app:  encryption-service
+        app: encryption-service
     spec:
       initContainers:
         - name: {{ .Chart.Name }}-jks
