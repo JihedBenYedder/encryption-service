@@ -24,6 +24,10 @@ data:
       encryptionKey: {{ .Values.encryptionKey }}
     
     management:
+      endpoint:
+        health:
+          probes:
+            enabled: true
       health:
         readinessstate:
           enabled: true
