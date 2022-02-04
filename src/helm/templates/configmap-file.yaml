@@ -30,7 +30,7 @@ data:
           probes:
             enabled: true
       health:
-        readynessstate:
+        readinessstate:
           enabled: true
         solr:
           enabled: false
