@@ -37,6 +37,7 @@ data:
 
     spring:
       cloud:
+        config: false
         vault:
           host: localhost
           uri: https://vault.vault:8200
