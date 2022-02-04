@@ -29,6 +29,7 @@ data:
           exposure:
             include: health
         health:
+          enabled: true
           show-details: always
           probes:
             enabled: true
