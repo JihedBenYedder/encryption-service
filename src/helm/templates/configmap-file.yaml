@@ -27,7 +27,7 @@ data:
       endpoint:
         web:
           exposure:
-            include: health
+            include: "*"
         health:
           enabled: true
           show-details: always
