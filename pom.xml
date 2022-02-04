@@ -66,8 +66,8 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>5.0.7.RELEASE</version> </dependency>
-        <dependency>
+            <version>5.0.7.RELEASE</version>
+        </dependency>
 
         <dependency>
             <groupId>javax.inject</groupId>
