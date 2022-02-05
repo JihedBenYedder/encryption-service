@@ -22,22 +22,6 @@ data:
 
     security:
       encryptionKey: {{ .Values.encryptionKey }}
-    
-    management:
-      endpoint:
-        web:
-          exposure:
-            include: health
-        health:
-          enabled: true
-          show-details: always
-          probes:
-            enabled: true
-      health:
-        readinessstate:
-          enabled: true
-        solr:
-          enabled: false
 
     spring:
       cloud:

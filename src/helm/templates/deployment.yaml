@@ -55,11 +55,6 @@ spec:
           - name: http
             protocol: TCP
             containerPort: 8080
-          readinessProbe:
-            httpGet:
-              path: /encryption/actuator/health
-              port: http
-            initialDelaySeconds: 30
           envFrom:
             - configMapRef:
                 name: {{ .Release.Name }}-configmap-env
