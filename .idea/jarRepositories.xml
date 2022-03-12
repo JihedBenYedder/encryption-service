@@ -12,6 +12,11 @@
       <option name="url" value="http://repo.spring.io/libs-release" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="central" />
+      <option name="url" value="http://nexus.devops-tech.xyz/repository/maven-proxy-jenkins/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="repository.springframework.maven.release" />
       <option name="name" value="Spring Framework Maven Release Repository" />
       <option name="url" value="http://maven.springframework.org/milestone/" />
