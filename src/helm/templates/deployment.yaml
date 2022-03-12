@@ -86,6 +86,10 @@ spec:
         - name: {{ .Release.Name }}-configmap-file
           configMap:
             name: {{ .Release.Name }}-configmap-file
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      { { - end } }
       {{- with .Values.affinity }}
       affinity:
         {{ toYaml . | indent 8 }}
