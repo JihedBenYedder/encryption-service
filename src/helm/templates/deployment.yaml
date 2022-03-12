@@ -85,8 +85,7 @@ spec:
           configMap:
             name: {{ .Release.Name }}-configmap-file
       resources:
-      {{ toYaml .Values.resources | indent 12 }}
-      {{- with .Values.nodeSelector }}
+        {{- toYaml .Values.resources | nindent 12 }}
       nodeSelector:
       {{ toYaml . | indent 8 }}
       {{- end }}
