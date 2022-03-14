@@ -29,7 +29,7 @@ data:
         vault:
           host: localhost
           uri: https://vault.vault:8200
-          authentication: TOKEN
+          authentication: KUBERNETES
           token: ${vault:secret/data/vault/token#VAULT_TOKEN}
           ssl:
             trust-store: file:/vault/jkscacert/ca.jks
