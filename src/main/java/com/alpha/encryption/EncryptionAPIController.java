@@ -15,7 +15,7 @@ public class EncryptionAPIController {
 
 	@Autowired
 	private EncryptionService encryptionService;
-	
+
 
 	@RequestMapping(path = "/encrypt", method = RequestMethod.POST)
 	public ResponseEntity<String> encrypt(final @RequestBody String str) throws JSONException {
