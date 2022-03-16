@@ -57,8 +57,9 @@ spec:
             containerPort: 8080
           livenessProbe:
             tcpSocket:
+              path: "encryption/actuator/health/"
               port: 8080
-            initialDelaySeconds: 60
+            initialDelaySeconds: 40
             periodSeconds: 20
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
