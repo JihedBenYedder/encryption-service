@@ -59,8 +59,9 @@ spec:
             httpGet:
               path: "encryption/actuator/health/"
               port: 8080
-            initialDelaySeconds: 40
+            initialDelaySeconds: 60
             periodSeconds: 20
+            timeoutSeconds: 10
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           envFrom:
