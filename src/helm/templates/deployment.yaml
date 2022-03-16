@@ -58,7 +58,7 @@ spec:
           livenessProbe:
             tcpSocket:
               port: 8080
-            initialDelaySeconds: 15
+            initialDelaySeconds: 60
             periodSeconds: 20
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
