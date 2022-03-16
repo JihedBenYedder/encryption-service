@@ -29,7 +29,7 @@ data:
         vault:
           host: localhost
           uri: https://vault.vault:8200
-          authentication: KUBERNETES
+          authentication: TOKEN
           generic:
             enabled: false
           token: ${vault:secret/data/vault/token#VAULT_TOKEN}
