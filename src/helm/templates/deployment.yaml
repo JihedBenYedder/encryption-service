@@ -55,6 +55,11 @@ spec:
           - name: http
             protocol: TCP
             containerPort: 8080
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           envFrom:
